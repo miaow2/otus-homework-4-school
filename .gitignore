@@ -1,0 +1,15 @@
+*.pyc
+*.swp
+*.sqlite3
+/school/static
+/venv/
+/*.sh
+.DS_Store
+.idea
+.coverage
+.vscode
+*.code-workspace
+.env
+*.log
+__pycache__/
+.pycharm_helpers/

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+<section>
+    <div>
+        <a href="{% url 'courses:course_add' %}" class="button">Add Course</a>
+    </div>
+</section>
+<section class="courses">
+    {% for course in courses %}
+        <div class="course-card">
+            <h2><a href="{% url 'courses:course' pk=course.pk %}">{{ course.name }}</a></h2>
+            <p class="description">{{ course.text_short }}</p>
+        </div>
+    {% empty %}
+        <div style="text-align: center;">
+            <h2>There are no courses</h2>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}

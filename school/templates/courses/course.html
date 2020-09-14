@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <div>
+        <a href="{% url 'courses:course_edit' pk=course.pk %}" class="edit_button">Edit Course</a>
+    </div>
+    <div>
+        <a href="{% url 'courses:course_delete' pk=course.pk %}" class="delete_button">Delete Course</a>
+    </div>
+</section>
+<section class="course">
+    <div class="course-description">
+        <h2>{{ course.name }}</h2>
+        <p class="description">Description: {{ course.description }}</p>
+    </div>
+</section>
+{% endblock %}

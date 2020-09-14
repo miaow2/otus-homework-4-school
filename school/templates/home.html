@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="home">
+    <div class="home-card">
+        <h4><a href="{% url 'courses:course_list' %}">Courses</a> ({{ stats.course_count }})</h4>
+    </div>
+</section>
+{% endblock %}
