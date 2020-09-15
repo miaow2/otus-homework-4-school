@@ -1,18 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section>
-    <div>
-        <a href="{% url 'courses:course_edit' pk=course.pk %}" class="edit_button">Edit Course</a>
+<div class="float-right" style="margin-top: 7px;">
+    <a href="{% url 'courses:course_edit' pk=course.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'courses:course_delete' pk=course.pk %}" class="btn btn-danger">Delete</a>
+</div>
+<h1>{{ course.name }}</h1>
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Info</strong>
+            </div>
+            <table class="table table-hover card-body attr-table">
+                <tr>
+                    <td>Description</td>
+                    <td>{{ course.description }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div>
-        <a href="{% url 'courses:course_delete' pk=course.pk %}" class="delete_button">Delete Course</a>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <strong>Lessons</strong>
+            </div>
+            <table class="table table-hover card-body attr-table">
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
     </div>
-</section>
-<section class="course">
-    <div class="course-description">
-        <h2>{{ course.name }}</h2>
-        <p class="description">Description: {{ course.description }}</p>
-    </div>
-</section>
+</div>
 {% endblock %}

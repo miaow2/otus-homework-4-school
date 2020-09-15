@@ -3,21 +3,25 @@
 {% block title %}Courses{% endblock %}
 
 {% block content %}
-<section>
-    <div>
-        <a href="{% url 'courses:course_add' %}" class="button">Add Course</a>
-    </div>
-</section>
-<section class="courses">
+<div class="float-right" style="margin-top: 7px;">
+    <a href="{% url 'courses:course_add' %}" class="btn btn-success">Add Course</a>
+</div>
+<h1>All Courses</h1>
+<div class="row">
     {% for course in courses %}
-        <div class="course-card">
-            <h2><a href="{% url 'courses:course' pk=course.pk %}">{{ course.name }}</a></h2>
-            <p class="description">{{ course.text_short }}</p>
+        <div class="col-sm-3" style="padding-bottom: 20px;">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ course.name }}</h5>
+                <p class="card-text">{{ course.text_short }}</p>
+                <a href="{% url 'courses:course' pk=course.pk %}" class="btn btn-primary">Look</a>
+            </div>
+            </div>
         </div>
     {% empty %}
         <div style="text-align: center;">
             <h2>There are no courses</h2>
         </div>
     {% endfor %}
-</section>
+</div>
 {% endblock %}

@@ -28,10 +28,11 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse('courses:course', args=[self.pk])
 
-    def text_short(self, obj):
-        if len(obj.description) < 40:
-            return obj.description
-        return f'{obj.description[:40]}...'
+    @property
+    def text_short(self):
+        if len(self.description) < 40:
+            return self.description
+        return f'{self.description[:40]}...'
 
 
 class Lesson(models.Model):

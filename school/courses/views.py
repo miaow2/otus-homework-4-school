@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls.base import reverse
+from django.utils.http import is_safe_url
 from django.views.generic import DeleteView, UpdateView, View
 
 from .forms import CourseForm
@@ -33,8 +34,8 @@ class CourseCreateView(View):
     def post(self, request):
         form = self.form(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('courses:course_list')
+            obj = form.save()
+            return redirect(obj.get_absolute_url())
         else:
             return render(request, 'courses/course_add.html', context={"form": form})
 
@@ -48,6 +49,6 @@ class CourseDeleteView(DeleteView):
 
 
 class CourseEditView(UpdateView):
-    template_name = 'courses/course_add.html'
+    template_name = 'courses/course_edit.html'
     form_class = CourseForm
     model = Course

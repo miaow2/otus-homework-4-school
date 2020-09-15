@@ -3,11 +3,14 @@
 {% block title %} Add Course {% endblock title %}
 
 {% block content %}
-
-    <form action="." method="POST">
-        {% csrf_token %}
-        <h1>Delete Course {{ object.name }}?</h1>
-        <p><input type="submit" value="Yes" /> <a href="{% url 'courses:course' pk=object.pk %}">Cancel</a></p>
-    </form>
-
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <h1>Delete Course {{ object.name }}?</h1>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+            <a href="{% url 'courses:course' pk=object.pk %}" class="btn btn-outline-dark">Cancel</a>
+        </form>
+    </div>
+</div>
 {% endblock content %}

@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="home">
-    <div class="home-card">
-        <h4><a href="{% url 'courses:course_list' %}">Courses</a> ({{ stats.course_count }})</h4>
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+            <div class="list-group">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <h4 class="list-group-item-heading"><a href="{% url 'courses:course_list' %}">Courses</a></h4>
+                        <span class="badge badge-primary badge-pill">{{ stats.course_count }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-</section>
+</div>
 {% endblock %}
