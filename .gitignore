@@ -1,4 +1,5 @@
 *.pyc
+*.rdb
 *.swp
 *.sqlite3
 /school/static

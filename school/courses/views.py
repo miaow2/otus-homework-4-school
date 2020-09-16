@@ -29,7 +29,7 @@ class CourseCreateView(View):
 
     def get(self, request):
         form = self.form()
-        return render(request, 'courses/course_add.html', context={"form": form})
+        return render(request, 'courses/course_add.html', {"form": form})
 
     def post(self, request):
         form = self.form(request.POST)
@@ -37,7 +37,7 @@ class CourseCreateView(View):
             obj = form.save()
             return redirect(obj.get_absolute_url())
         else:
-            return render(request, 'courses/course_add.html', context={"form": form})
+            return render(request, 'courses/course_add.html', {"form": form})
 
 
 class CourseDeleteView(DeleteView):
