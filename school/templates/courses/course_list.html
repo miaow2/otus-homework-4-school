@@ -3,9 +3,11 @@
 {% block title %}Courses{% endblock %}
 
 {% block content %}
-<div class="float-right" style="margin-top: 7px;">
-    <a href="{% url 'courses:course_add' %}" class="btn btn-success">Add Course</a>
-</div>
+{% if request.user.is_superuser or request.user.is_professor %}
+    <div class="float-right" style="margin-top: 7px;">
+        <a href="{% url 'courses:course_add' %}" class="btn btn-success">Add Course</a>
+    </div>
+{% endif %}
 <h1>All Courses</h1>
 <div class="row">
     {% for course in courses %}
@@ -20,7 +22,7 @@
         </div>
     {% empty %}
         <div style="text-align: center;">
-            <h2>There are no courses</h2>
+            <h3>There are no courses</h3>
         </div>
     {% endfor %}
 </div>

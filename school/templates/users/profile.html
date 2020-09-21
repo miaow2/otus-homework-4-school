@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile {{ request.user.username }}{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-6 col-offset-3">
+        <h3>Profile</h3>
+        <div class="card">
+            <div class="card-body">
+                <p><span style="font-weight: bold;">Username: </span>{{ request.user.username }}</p>
+                <p><span style="font-weight: bold;">First Name: </span>{{ request.user.first_name|default:"—" }}</p>
+                <p><span style="font-weight: bold;">Last Name: </span>{{ request.user.last_name|default:"—" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

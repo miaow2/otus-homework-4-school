@@ -21,6 +21,11 @@ class Course(models.Model):
         help_text="Duration in days"
     )
     description = models.TextField()
+    participants = models.ManyToManyField(
+        to='users.User',
+        blank=True,
+        related_name="courses"
+    )
 
     def __str__(self):
         return self.name

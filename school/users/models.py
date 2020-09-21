@@ -1,26 +1,15 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class Professor(User):
-    type = models.CharField(
-        max_length=30,
-        default='professor'
-    )
-    courses = models.ManyToManyField(
-        to='courses.Course',
-        blank=True,
-        related_name='professors'
-    )
+class User(AbstractUser):
+    professor = models.BooleanField(default=False)
+    student = models.BooleanField(default=False)
 
+    @property
+    def is_professor(self):
+        return self.professor
 
-class Student(User):
-    type = models.CharField(
-        max_length=30,
-        default='student'
-    )
-    courses = models.ManyToManyField(
-        to='courses.Course',
-        blank=True,
-        related_name='students'
-    )
+    @property
+    def is_student(self):
+        return self.student

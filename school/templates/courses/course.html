@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="float-right" style="margin-top: 7px;">
-    <a href="{% url 'courses:course_edit' pk=course.pk %}" class="btn btn-warning">Edit</a>
-    <a href="{% url 'courses:course_delete' pk=course.pk %}" class="btn btn-danger">Delete</a>
-</div>
+{% if request.user.is_superuser or request.user.is_professor %}
+    <div class="float-right" style="margin-top: 7px;">
+        <a href="" class="btn btn-primary">Add Lesson</a>
+        <a href="{% url 'courses:course_edit' pk=course.pk %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'courses:course_delete' pk=course.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+{% endif %}
 <h1>{{ course.name }}</h1>
 <div class="row" style="margin-top: 20px;">
     <div class="col-md-6">

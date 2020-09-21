@@ -17,7 +17,7 @@ class CourseFactory(factory.django.DjangoModelFactory):
 
 
 def create_all():
-    course = CourseFactory.build_batch(5)
+    course = CourseFactory.create_batch(5)
     print(course)
 
 
