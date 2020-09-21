@@ -1,9 +1,10 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import HttpResponseRedirect, redirect, render
+from django.shortcuts import get_object_or_404, HttpResponseRedirect, redirect, render
 from django.urls import reverse
 from django.views.generic.base import View
+from rest_framework.authtoken.models import Token
 
 from .forms import RegisterForm
 
@@ -71,3 +72,17 @@ class RegisterView(View):
             return redirect('login')
         else:
             return render(request, self.template_name, {"form": form})
+
+
+class TokenCreateView(LoginRequiredMixin, View):
+
+    def get(self, request):
+
+        try:
+            token = Token.objects.get(user=request.user)
+            token.delete()
+        except Token.DoesNotExist:
+            pass
+        Token.objects.create(user=request.user)
+
+        return redirect('users:profile')

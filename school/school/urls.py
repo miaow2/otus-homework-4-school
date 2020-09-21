@@ -11,6 +11,7 @@ urlpatterns = [
     path('contacts/', ContactView.as_view(), name='contacts'),
     path('admin/', admin.site.urls),
     path('school/', include('courses.urls')),
+    path('api/school/', include('courses.api.urls')),
     path('users/', include('users.urls')),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),

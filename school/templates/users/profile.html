@@ -14,5 +14,14 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6 col-offset-3">
+        <h3>Token</h3>
+        <div class="card">
+            <div class="card-body">
+                <p><span style="font-weight: bold;">Token: </span>{{ request.user.auth_token.key|default:"—" }}</p>
+                <a href="{% url 'users:create_token' %}" class="btn btn-success">Generate</a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
