@@ -41,3 +41,10 @@ class HomeView(View):
             'course_count': Course.objects.count()
         }
         return render(request, self.template_name, {'stats': stats})
+
+
+class FrontendView(View):
+    template_name = 'frontend.html'
+
+    def get(self, request):
+        return render(request, self.template_name, {})
