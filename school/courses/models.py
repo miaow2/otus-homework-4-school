@@ -39,6 +39,14 @@ class Course(models.Model):
             return self.description
         return f'{self.description[:40]}...'
 
+    @property
+    def students(self):
+        return self.participants.filter(student=True)
+
+    @property
+    def professors(self):
+        return self.participants.filter(professor=True)
+
 
 class Lesson(models.Model):
     name = models.CharField(
@@ -49,11 +57,24 @@ class Lesson(models.Model):
         on_delete=models.CASCADE,
         related_name="lessons"
     )
-    date = models.DateTimeField()
     duration = models.PositiveIntegerField(
         help_text="Duration in minutes"
     )
     description = models.TextField()
 
+    class Meta:
+        unique_together = [
+            ['course', 'name']
+        ]
+
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('courses:lesson', args=[self.pk])
+
+    @property
+    def text_short(self):
+        if len(self.description) < 40:
+            return self.description
+        return f'{self.description[:40]}...'

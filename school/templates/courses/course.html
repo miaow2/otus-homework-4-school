@@ -2,14 +2,19 @@
 
 {% block content %}
 <div class="float-right" style="margin-top: 7px;">
-{% if request.user.is_student %}
-    <a href="" class="btn btn-primary">Submit</a>
-{% endif %}
-{% if request.user.is_superuser or request.user.is_professor %}
-    <a href="" class="btn btn-primary">Add Lesson</a>
-    <a href="{% url 'courses:course_edit' pk=course.pk %}" class="btn btn-warning">Edit</a>
-    <a href="{% url 'courses:course_delete' pk=course.pk %}" class="btn btn-danger">Delete</a>
-{% endif %}
+    {% if request.user in course.participants.all %}
+        <form action="{% url 'courses:course_submit' pk=course.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">UnSubmit</button>
+        </form>
+    {% else %}
+        <a href="{% url 'courses:course_submit' pk=course.pk %}" class="btn btn-primary">Submit</a>
+    {% endif %}
+    {% if request.user.is_superuser or request.user.is_professor %}
+        <a href="{% url 'courses:lesson_add' %}?course={{ course.pk }}" class="btn btn-primary">Add Lesson</a>
+        <a href="{% url 'courses:course_edit' pk=course.pk %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'courses:course_delete' pk=course.pk %}" class="btn btn-danger">Delete</a>
+    {% endif %}
 </div>
 <h1>{{ course.name }}</h1>
 <div class="row" style="margin-top: 20px;">
@@ -32,10 +37,19 @@
                 <strong>Lessons</strong>
             </div>
             <table class="table table-hover card-body attr-table">
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
+                {% for lesson in course.lessons.all %}
+                    <tr>
+                        <td>{{ lesson.name }}</td>
+                        <td>
+                            <a href="{% url 'courses:lesson_edit' pk=lesson.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'courses:lesson_delete' pk=lesson.pk %}" class="btn btn-danger btn-sm">Del</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        None
+                    </tr>
+                {% endfor %}
             </table>
         </div>
     </div>

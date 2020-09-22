@@ -1,6 +1,6 @@
 from rest_framework import routers
 
-from .views import CourseViewSet
+from .views import CourseViewSet, LessonViewSet
 
 
 class CoursesRootView(routers.APIRootView):
@@ -12,6 +12,7 @@ class CoursesRootView(routers.APIRootView):
 router = routers.DefaultRouter()
 router.APIRootView = CoursesRootView
 router.register('courses', CourseViewSet)
+router.register('lessons', LessonViewSet)
 
 app_name = 'courses-api'
 urlpatterns = router.urls

@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %} Delete Course {% endblock title %}
+{% block title %} Delete Lesson {% endblock title %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <form action="." method="POST">
             {% csrf_token %}
-            <h1>Delete Course {{ object.name }}?</h1>
+            <h1>Delete Lesson {{ object.name }}?</h1>
             <button type="submit" class="btn btn-danger">Confirm</button>
-            <a href="{% url 'courses:course' pk=object.pk %}" class="btn btn-outline-dark">Cancel</a>
+            <a href="{% url 'courses:course' pk=object.course.pk %}" class="btn btn-outline-dark">Cancel</a>
         </form>
     </div>
 </div>

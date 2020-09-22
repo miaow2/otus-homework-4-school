@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %} Edit Course {% endblock title %}
+{% block title %} Add Lesson {% endblock title %}
 
 {% block content %}
 <form action="" method="POST">
     {% csrf_token %}
     <div class="row" style="margin-bottom: 10px;">
         <div class="col-md-6 col-offset-3">
-            <h3>Edit</h3>
+            <h3>Add</h3>
             <div class="card">
                 <div class="card-body">
                     {{ form.as_p }}
@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 col-offset-3 text-right">
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Add</button>
             <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-outline-dark">Cancel</a>
         </div>
     </div>

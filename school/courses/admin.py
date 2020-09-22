@@ -19,7 +19,7 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'course', 'date', 'duration', 'description'
+        'id', 'name', 'course', 'duration', 'description'
     )
     list_display_links = ('name',)
 
