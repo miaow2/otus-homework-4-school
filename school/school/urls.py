@@ -18,6 +18,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
-    path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema)),
+    path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema), name='graphql'),
     path("frontend/", FrontendView.as_view(), name='frontend'),
 ]

@@ -1,7 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, HttpResponseRedirect, redirect, render
+from django.shortcuts import HttpResponseRedirect, redirect, render
 from django.urls import reverse
 from django.views.generic.base import View
 from rest_framework.authtoken.models import Token

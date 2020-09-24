@@ -6,9 +6,9 @@ from .nested_serializers import NestedCourseSerializer, NestedLessonSerializer
 
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
-    lessons = NestedLessonSerializer(many=True)
-    students = NestedUserSerializer(many=True)
-    professors = NestedUserSerializer(many=True)
+    lessons = NestedLessonSerializer(required=False, many=True)
+    students = NestedUserSerializer(required=False, many=True)
+    professors = NestedUserSerializer(required=False, many=True)
 
     class Meta:
         model = Course

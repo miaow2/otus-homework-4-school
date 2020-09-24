@@ -2,19 +2,23 @@
 
 {% block content %}
 <div class="float-right" style="margin-top: 7px;">
-    {% if request.user in course.participants.all %}
-        <form action="{% url 'courses:course_submit' pk=course.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">UnSubmit</button>
-        </form>
-    {% else %}
-        <a href="{% url 'courses:course_submit' pk=course.pk %}" class="btn btn-primary">Submit</a>
-    {% endif %}
-    {% if request.user.is_superuser or request.user.is_professor %}
-        <a href="{% url 'courses:lesson_add' %}?course={{ course.pk }}" class="btn btn-primary">Add Lesson</a>
-        <a href="{% url 'courses:course_edit' pk=course.pk %}" class="btn btn-warning">Edit</a>
-        <a href="{% url 'courses:course_delete' pk=course.pk %}" class="btn btn-danger">Delete</a>
-    {% endif %}
+    <ul style="list-style: none; display: flex;">
+        {% if request.user in course.participants.all %}
+            <li style="margin-left: 5px;">
+                <form action="{% url 'courses:course_submit' pk=course.pk %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">UnSubmit</button>
+                </form>
+            </li>
+        {% elif request.user.is_authenticated %}
+            <li style="margin-left: 5px;"><a href="{% url 'courses:course_submit' pk=course.pk %}" class="btn btn-primary">Submit</a></li>
+        {% endif %}
+        {% if request.user.is_superuser or request.user.is_professor %}
+            <li style="margin-left: 5px;"><a href="{% url 'courses:lesson_add' %}?course={{ course.pk }}" class="btn btn-primary">Add Lesson</a></li>
+            <li style="margin-left: 5px;"><a href="{% url 'courses:course_edit' pk=course.pk %}" class="btn btn-warning">Edit</a></li>
+            <li style="margin-left: 5px;"><a href="{% url 'courses:course_delete' pk=course.pk %}" class="btn btn-danger">Delete</a></li>
+        {% endif %}
+    </ul>
 </div>
 <h1>{{ course.name }}</h1>
 <div class="row" style="margin-top: 20px;">
