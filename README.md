@@ -8,6 +8,7 @@ OTUS Homework 4 Сайт "Обучающий сайт"
 - [Frontend](#frontend)
 - [Пользователи](#users)
 - [API](#api)
+- [Тесты](#tests)
 - [GraphQL](#graphql)
 - [Домашнее задание](#homework)
 
@@ -38,6 +39,10 @@ python manage.py collectstatic
 # API
 
 Есть две ссылки в API: `api/school/courses/`, `api/school/lessons/`. Авторизация по сессии или по токену. Токен можно сгенерить в профиле. В `api/school/courses/` виден список всех курсов, у каждого курса также отображаются студенты, преподаватели и уроки. В `api/school/lessons/` показываются все уроки и с каким курсом связаны. Так же уроки можно фильтровать по айдишнику и имени курса, `course_id` и `course` соответственно.
+
+# Тесты
+
+Тесты API находятся в файле `courses/tests.py`.
 
 # GraphQL
 
