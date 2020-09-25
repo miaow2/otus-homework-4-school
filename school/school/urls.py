@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
@@ -21,3 +22,9 @@ urlpatterns = [
     path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema), name='graphql'),
     path("frontend/", FrontendView.as_view(), name='frontend'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

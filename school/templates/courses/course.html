@@ -23,7 +23,7 @@
 <h1>{{ course.name }}</h1>
 <div class="row" style="margin-top: 20px;">
     <div class="col-md-6">
-        <div class="card">
+        <div class="card" style="margin-bottom: 20px;">
             <div class="card-header">
                 <strong>Info</strong>
             </div>
@@ -34,9 +34,27 @@
                 </tr>
             </table>
         </div>
+        {% if request.user.is_superuser or request.user.is_professor %}
+            <div class="card">
+                <div class="card-header">
+                    <strong>Students</strong>
+                </div>
+                <table class="table table-hover card-body attr-table">
+                    {% for student in course.students %}
+                        <tr>
+                            <td>{{ student.username }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td>No students</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
     </div>
     <div class="col-md-6">
-        <div class="card">
+        <div class="card" style="margin-bottom: 20px;">
             <div class="card-header">
                 <strong>Lessons</strong>
             </div>
@@ -44,14 +62,34 @@
                 {% for lesson in course.lessons.all %}
                     <tr>
                         <td>{{ lesson.name }}</td>
-                        <td>
-                            <a href="{% url 'courses:lesson_edit' pk=lesson.pk %}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{% url 'courses:lesson_delete' pk=lesson.pk %}" class="btn btn-danger btn-sm">Del</a>
-                        </td>
+                        {% if request.user.is_superuser or request.user.is_professor %}
+                            <td>
+                                <a href="{% url 'courses:lesson_edit' pk=lesson.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="{% url 'courses:lesson_delete' pk=lesson.pk %}" class="btn btn-danger btn-sm">Del</a>
+                            </td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
                     </tr>
                 {% empty %}
                     <tr>
-                        None
+                        <td>None</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <strong>Professors</strong>
+            </div>
+            <table class="table table-hover card-body attr-table">
+                {% for professor in course.professors %}
+                    <tr>
+                        <td>{{ professor.username }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>No professors</td>
                     </tr>
                 {% endfor %}
             </table>

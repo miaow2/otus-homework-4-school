@@ -1,4 +1,5 @@
 import graphene
+from django.shortcuts import get_object_or_404
 from graphene_django.types import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
@@ -64,7 +65,7 @@ class CourseMutation(graphene.Mutation):
     course = graphene.Field(CourseType)
 
     def mutate(self, info, course_id, new_name):
-        course = Course.objects.get(id=course_id)
+        course = get_object_or_404(Course, pk=course_id)
         course.name = new_name
         course.save()
         return {

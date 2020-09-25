@@ -18,10 +18,11 @@ class CourseListView(View):
 
 
 class CourseView(View):
+    queryset = Course.objects.prefetch_related('lessons', 'participants')
     template_name = 'courses/course.html'
 
     def get(self, request, pk):
-        course = get_object_or_404(Course.objects.all(), pk=pk)
+        course = get_object_or_404(self.queryset, pk=pk)
         return render(request, self.template_name, {'course': course})
 
 
