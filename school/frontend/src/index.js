@@ -2,7 +2,7 @@
 
 const axios = require('axios');
 
-axios.get('http://127.0.0.1:8001/api/school/lessons')
+axios.get('/api/school/lessons')
     .then((response) => {
         console.log(response.data.results);
     })
@@ -10,6 +10,6 @@ axios.get('http://127.0.0.1:8001/api/school/lessons')
         console.log(error);
     })
 
-fetch('http://127.0.0.1:8001/api/school/courses')
+fetch('/api/school/courses')
     .then(response => console.log(response.json()))
     .catch(error => console.log(error));

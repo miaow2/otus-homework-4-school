@@ -416,7 +416,7 @@ eval("// shim for using process in browser\nvar process = module.exports = {};\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\naxios.get('http://127.0.0.1:8001/api/school/lessons').then(function (response) {\n  console.log(response.data.results);\n})[\"catch\"](function (error) {\n  console.log(error);\n});\nfetch('http://127.0.0.1:8001/api/school/courses').then(function (response) {\n  return console.log(response.json());\n})[\"catch\"](function (error) {\n  return console.log(error);\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\nvar axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\naxios.get('/api/school/lessons').then(function (response) {\n  console.log(response.data.results);\n})[\"catch\"](function (error) {\n  console.log(error);\n});\nfetch('/api/school/courses').then(function (response) {\n  return console.log(response.json());\n})[\"catch\"](function (error) {\n  return console.log(error);\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
