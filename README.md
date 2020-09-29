@@ -48,6 +48,16 @@ python manage.py collectstatic
 
 Ссылка на GraphQL есть в навигиционном баре.
 
+# Оптимизация работы с БД
+
+До
+
+![Screenshot before prefetch](images/before_prefetch.png "Before Prefetch")
+
+После
+
+![Screenshot after prefetch](images/after_prefetch.png "After Prefetch")
+
 # Домашнее задание
 
 1. Создать проект "Обучающий сайт". По нему будут задания до конца курса, сначала backend потом frontend. Рекомендуется создать для проекта отдельный репозиторий
