@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./src/index.js --output ../project-static/frontend/index.js",
+    "dev": "webpack --mode development --watch ./src/index.js --output ../project-static/frontend/index.js",
     "build": "webpack --mode production ./src/index.js --output ../project-static/frontend/index.js"
   },
   "keywords": [],
@@ -27,5 +27,10 @@
       "@babel/env",
       "@babel/react"
     ]
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }

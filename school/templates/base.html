@@ -28,9 +28,6 @@
                   <a class="nav-link" href="{% url 'graphql' %}">GraphQL</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'frontend' %}">Frontend</a>
-                </li>
-                <li class="nav-item active">
                   <a class="nav-link" href="{% url 'contacts' %}">Contacts</a>
                 </li>
                 {% if request.user.is_authenticated %}
@@ -53,9 +50,9 @@
         </nav>
     </header>
     <div class="container wrapper" style="padding-top: 30px;">
-        {% block content %}{% endblock %}
+      {% block content %}{% endblock content %}
     </div>
-
-    <script src="{% static 'bootstrap-4.5.2-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'frontend/index.js' %}"></script>
 </body>
+
 </html>
