@@ -5,13 +5,13 @@ from django.urls import path
 
 from graphene_django.views import GraphQLView
 from users.views import LoginView, LogoutView, RegisterView
+from .api import contacts_view
 from .schema import schema
-from .views import ContactView, HomeView, FrontendView
 
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
-    path('contacts/', ContactView.as_view(), name='contacts'),
+    path('', include('frontend.urls')),
+    path('api/contacts/', contacts_view),
     path('admin/', admin.site.urls),
     path('school/', include('courses.urls')),
     path('api/school/', include('courses.api.urls')),

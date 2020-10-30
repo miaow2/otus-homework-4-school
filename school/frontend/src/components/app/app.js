@@ -1,51 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-export default class App extends Component {
+import Contacts from '../contacts';
+import CoursesList from '../courses-list'
+import CoursePage from '../course-page'
+import Header from '../header';
+import Home from '../home';
+import store from '../../store';
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: {},
-      loaded: false,
-      placeholder: "Loading"
-    };
-  };
+const App = () => {
 
-  componentDidMount() {
-    fetch("/api/school/courses")
-      .then(response => {
-        if (response.status > 400) {
-          return this.setState(() => {
-            return { placeholder: "Something went wrong!" };
-          });
-        }
-        return response.json();
-      })
-      .then(data => {
-        this.setState(() => {
-          return {
-            data,
-            loaded: true
-          };
-        });
-      });
-  };
-
-  render() {
-    return (
-      <div className="col-sm-6 col-md-4">
-        <div className="panel panel-default">
-            <ul className="list-group">
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                <h4 className="list-group-item-heading"><a href="school/courses">Courses</a></h4>
-                <span className="badge badge-primary badge-pill">{ this.state.data.count }</span>
-              </li>
-            </ul>
-        </div>
-      </div>
-    );
-  };
+  return (
+    <>
+      <Provider store={ store }>
+        <BrowserRouter>
+          <Header />
+          <div className="container">
+            <Switch>
+              <Route path="/" component={ Home } exact />
+              <Route path="/courses" component={ CoursesList } exact />
+              <Route path="/courses/:id" render={ ({ match }) => {
+                    const { id } = match.params
+                    return <CoursePage courseId={ id } />
+                  }} />
+              <Route path="/contacts" component={ Contacts } />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </Provider>
+    </>
+  );
 };
 
-render(<App />, document.getElementById('home'));
+export default App;
+render(<App />, document.getElementById('root'));

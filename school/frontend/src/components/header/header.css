@@ -1,0 +1,9 @@
+li.nav-item a {
+  color: rgba(0,0,0,.9);
+  padding: .5rem 1rem;
+  padding-right: .5rem;
+  padding-left: .5rem;
+  text-decoration: none;
+  background-color: transparent;
+  display: block;
+}

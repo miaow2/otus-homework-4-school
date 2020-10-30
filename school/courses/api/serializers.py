@@ -13,7 +13,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Course
         fields = [
-            'id', 'name', 'duration', 'text_short', 'lessons', 'students', 'professors'
+            'id', 'name', 'duration', 'description', 'lessons', 'students', 'professors'
         ]
 
 
@@ -22,4 +22,4 @@ class LessonSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['id', 'name', 'duration', 'text_short', 'course']
+        fields = ['id', 'name', 'duration', 'description', 'course']

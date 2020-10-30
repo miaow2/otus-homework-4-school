@@ -1,0 +1,1 @@
+export const COURSE_COUNT = "COURSE_COUNT";
