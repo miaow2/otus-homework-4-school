@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getCoursesCount } from '../actions/home';
+import { getCoursesCount } from '../../actions/home';
 
 class Home extends Component {
 
@@ -22,7 +22,7 @@ class Home extends Component {
               <h4 className="list-group-item-heading">
                 <Link to="/courses">Courses</Link>
               </h4>
-              <span className="badge badge-primary badge-pill">{ coursesCount }</span>
+              <span className="badge badge-primary badge-pill">{coursesCount}</span>
             </li>
           </ul>
         </div>

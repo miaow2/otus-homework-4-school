@@ -1,8 +1,11 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Register = () => {
+import { registerUser } from '../../actions/auth';
+import { createMessage } from '../../actions/messages';
+
+const Register = ({ isAuthenticated, registerUser, createMessage }) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,23 +15,25 @@ const Register = () => {
 
     e.preventDefault();
 
-    const data = { username, password };
+    if (password !== password2) {
+      createMessage({ passwordNotMatch: 'Passwords do not match' });
+      setPassword("")
+      setPassword2("")
+    }
+    else {
+      registerUser(username, password)
+    }
+  };
 
-    axios
-      .post('/api/auth/register', data)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-
-    setUsername("");
-    setPassword("");
-    setPassword2("");
+  if (isAuthenticated) {
+    return <Redirect to="/" />
   };
 
   return (
     <div className="col-md-6 m-auto">
       <div className="card card-body mt-5">
         <h2 className="text-center">Register</h2>
-        <form onSubmit={ onSubmit }>
+        <form onSubmit={onSubmit}>
           <div className="form-group">
             <label>Username</label>
             <input
@@ -36,7 +41,7 @@ const Register = () => {
               className="form-control"
               name="username"
               onChange={(e) => setUsername(e.target.value)}
-              value={ username }
+              value={username}
             />
           </div>
           <div className="form-group">
@@ -46,7 +51,7 @@ const Register = () => {
               className="form-control"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              value={ password }
+              value={password}
             />
           </div>
           <div className="form-group">
@@ -56,7 +61,7 @@ const Register = () => {
               className="form-control"
               name="password2"
               onChange={(e) => setPassword2(e.target.value)}
-              value={ password2 }
+              value={password2}
             />
           </div>
           <div className="form-group">
@@ -73,4 +78,8 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { registerUser, createMessage })(Register);

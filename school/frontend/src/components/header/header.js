@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { LOGOUT_SUCCESS } from '../actions/types';
+import { logoutUser } from '../../actions/auth';
+
+import './header.css';
 
 const Header = ({ auth, logoutUser }) => {
 
@@ -19,7 +21,7 @@ const Header = ({ auth, logoutUser }) => {
         </span>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="/" onClick={logoutUser}>Logout</a>
+        <button className="button-link" onClick={logoutUser}>Logout</button>
       </li>
     </>
   );
@@ -69,8 +71,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  logoutUser: () => dispatch({ type: LOGOUT_SUCCESS })
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, { logoutUser })(Header);

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../actions/auth';
+import { loginUser } from '../../actions/auth';
 
 const Login = ({ isAuthenticated, loginUser }) => {
 
@@ -13,7 +13,6 @@ const Login = ({ isAuthenticated, loginUser }) => {
 
     e.preventDefault();
 
-    const data = { username, password }
     loginUser(username, password)
 
     setUsername("");

@@ -1,18 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 
+import Alerts from '../alerts';
 import Contacts from '../contacts';
 import CoursesList from '../courses-list'
 import CoursePage from '../course-page'
 import Header from '../header';
 import Home from '../home';
 import store from '../../store';
-import { Login, Register } from '../accounts';
 import PrivateRoute from '../private-route';
-import { loadUser } from '../actions/auth';
+import { Login, Register } from '../accounts';
+import { loadUser } from '../../actions/auth';
 
+const alertOptions = {
+  timeout: 5000,
+  position: "top center"
+};
 
 const App = () => {
 
@@ -21,23 +28,26 @@ const App = () => {
   }, [])
 
   return (
-    <Provider store={ store }>
-      <Router>
-        <Header />
-        <div className="container">
-          <Switch>
-            <Route path="/" component={ Home } exact />
-            <Route path="/courses" component={ CoursesList } exact />
-            <Route path="/courses/:id" render={ ({ match }) => {
-                  const { id } = match.params
-                  return <CoursePage courseId={ id } />
-                }} />
-            <PrivateRoute path="/contacts" component={ Contacts } />
-            <Route path="/register" component={ Register } />
-            <Route path="/login" component={ Login } />
-          </Switch>
-        </div>
-      </Router>
+    <Provider store={store}>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <Router>
+          <Header />
+          <Alerts />
+          <div className="container">
+            <Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/courses" component={CoursesList} exact />
+              <Route path="/courses/:id" render={({ match }) => {
+                const { id } = match.params
+                return <CoursePage courseId={id} />
+              }} />
+              <PrivateRoute path="/contacts" component={Contacts} />
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+            </Switch>
+          </div>
+        </Router>
+      </AlertProvider>
     </Provider>
   );
 };

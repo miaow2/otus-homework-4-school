@@ -1,0 +1,15 @@
+.button-link {
+  color: rgba(0,0,0,.5);
+  padding-right: .5rem;
+  padding-left: .5rem;
+  display: block;
+  padding: .5rem 1rem;
+  background-color: transparent;
+  list-style: none;
+  text-decoration: none;
+  border:none;
+}
+
+.button-link:hover {
+  color: rgba(0,0,0,.7);;
+}
