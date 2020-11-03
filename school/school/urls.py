@@ -11,11 +11,12 @@ from .schema import schema
 
 urlpatterns = [
     path('', include('frontend.urls')),
+    path('', include('users.urls')),
     path('api/contacts/', contacts_view),
     path('admin/', admin.site.urls),
-    path('school/', include('courses.urls')),
     path('api/school/', include('courses.api.urls')),
-    path('users/', include('users.urls')),
+    #
+    path('school/', include('courses.urls')),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),

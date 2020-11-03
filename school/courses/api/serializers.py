@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from courses.models import Course, Lesson
-from users.api.nested_serializers import NestedUserSerializer
+from users.nested_serializers import NestedUserSerializer
 from .nested_serializers import NestedCourseSerializer, NestedLessonSerializer
 
 
