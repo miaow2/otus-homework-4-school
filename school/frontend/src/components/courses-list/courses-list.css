@@ -1,4 +1,4 @@
-.card-body a {
+.card-body>a {
   text-align: center;
   color: white;
   background: #007bff;
@@ -12,6 +12,6 @@
   border-radius: .25rem;
 }
 
-.card-body a:hover {
+.card-body>a:hover {
   background: #0069d9;
 }

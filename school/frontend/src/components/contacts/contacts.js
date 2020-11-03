@@ -38,8 +38,7 @@ const Contacts = () => {
         <div className="col-md-6 col-offset-3">
           <h3 className="mt-4">Feedback</h3>
           <div className="card card-body">
-            {/* <form> */}
-            <form onSubmit={ onSubmit }>
+            <form onSubmit={onSubmit}>
               <div className="mb-2">
                 <label>Your email:</label><br />
                 <input
@@ -48,7 +47,7 @@ const Contacts = () => {
                   className="form-control"
                   placeholder="E-mail"
                   onChange={(e) => setEmail(e.target.value)}
-                  value={ email }/>
+                  value={email} />
               </div>
               <div className="mb-2">
                 <label>Theme:</label><br />
@@ -58,7 +57,7 @@ const Contacts = () => {
                   className="form-control"
                   placeholder="Theme"
                   onChange={(e) => setTheme(e.target.value)}
-                  value={ theme }/>
+                  value={theme} />
               </div>
               <div className="mb-2">
                 <label>Message:</label><br />
@@ -68,7 +67,7 @@ const Contacts = () => {
                   rows="5"
                   placeholder="Your message"
                   onChange={(e) => setMessage(e.target.value)}
-                  value={ message }>
+                  value={message}>
                 </textarea>
               </div>
               <button type="submit" className="btn btn-primary">Send</button>

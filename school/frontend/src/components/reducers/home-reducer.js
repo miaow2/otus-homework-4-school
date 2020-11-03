@@ -1,9 +1,7 @@
 import { COURSE_COUNT } from '../actions/types';
 
 const initialState = {
-  home: {
-    coursesCount: 0
-  }
+  coursesCount: 0
 };
 
 const home = (state = initialState, action) => {
@@ -11,9 +9,7 @@ const home = (state = initialState, action) => {
     case COURSE_COUNT:
       return {
         ...state,
-        home: {
-          coursesCount: action.payload
-        }
+        coursesCount: action.payload
       }
     default:
       return state

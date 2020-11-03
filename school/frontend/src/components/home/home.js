@@ -32,7 +32,7 @@ class Home extends Component {
 };
 
 const mapStateToProps = (state) => ({
-  coursesCount: state.home.home
+  coursesCount: state.home
 });
 
 export default connect(mapStateToProps, { getCoursesCount })(Home);
