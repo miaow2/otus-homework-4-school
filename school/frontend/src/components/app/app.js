@@ -13,6 +13,7 @@ import Header from '../header';
 import Home from '../home';
 import store from '../../store';
 import PrivateRoute from '../private-route';
+import Profile from '../profile';
 import { Login, Register } from '../accounts';
 import { loadUser } from '../../actions/auth';
 
@@ -41,9 +42,10 @@ const App = () => {
                 const { id } = match.params
                 return <CoursePage courseId={id} />
               }} />
-              <PrivateRoute path="/contacts" component={Contacts} />
+              <Route path="/contacts" component={Contacts} />
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
+              <PrivateRoute path="/profile" component={Profile} />
             </Switch>
           </div>
         </Router>

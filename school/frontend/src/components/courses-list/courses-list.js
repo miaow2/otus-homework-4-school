@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import Spinner from '../spinner';
 
-import './courses-list.css';
-
 const CoursesList = () => {
 
   const [courses, setCourses] = useState([]);
@@ -13,12 +11,12 @@ const CoursesList = () => {
 
   useEffect(() => {
     axios
-    .get('/api/school/courses')
-    .then((res) => {
-      setCourses(res.data.results);
-      setLoaded(true)
-    })
-    .catch((err) => console.log(err));
+      .get('/api/school/courses')
+      .then((res) => {
+        setCourses(res.data.results);
+        setLoaded(true)
+      })
+      .catch((err) => console.log(err));
   }, [])
 
   if (courses.length === 0 & loaded) {
@@ -32,11 +30,11 @@ const CoursesList = () => {
   if (loaded) {
     const items = courses.map((item) => {
       return (
-        <div key={ item.id } className="col-sm-3 pb-4">
+        <div key={item.id} className="col-sm-3 pb-4">
           <div className="card card-body">
-            <h5 className="card-title">{ item.name }</h5>
-            <p className="card-text">{ item.description.slice(0, 40) }</p>
-            <Link to={`/courses/${item.id}`}>Look</Link>
+            <h5 className="card-title">{item.name}</h5>
+            <p className="card-text">{item.description.slice(0, 40)}</p>
+            <Link to={`/courses/${item.id}`} className="btn btn-primary">Look</Link>
           </div>
         </div>
       );
@@ -45,7 +43,7 @@ const CoursesList = () => {
       <>
         <h1>All Courses</h1>
         <div className="row">
-          { items }
+          {items}
         </div>
       </>
     );

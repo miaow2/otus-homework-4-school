@@ -11,6 +11,9 @@ const Alerts = ({ alert, errors, messages }) => {
     if (errors.msg.non_field_errors) {
       alert.error(errors.msg.non_field_errors.join())
     };
+    if (errors.msg.detail) {
+      alert.error(errors.msg.detail.join())
+    };
   }, [errors]);
 
   useEffect(() => {
@@ -22,6 +25,9 @@ const Alerts = ({ alert, errors, messages }) => {
     };
     if (messages.passwordNotMatch) {
       alert.error(messages.passwordNotMatch)
+    };
+    if (messages.changeTokenSuccess) {
+      alert.success(messages.changeTokenSuccess)
     };
   }, [messages]);
 

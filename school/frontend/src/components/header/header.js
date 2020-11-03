@@ -13,12 +13,11 @@ const Header = ({ auth, logoutUser }) => {
   const authLinks = (
     <>
       <li className="nav-item">
-        {/* <a className="nav-link" href="#">Hello {user.username}</a> */}
-        <span className="navbar-text">
+        <Link to="/profile" className="nav-link">
           <strong>
             {user ? `Hello ${user.username}` : ""}
           </strong>
-        </span>
+        </Link>
       </li>
       <li className="nav-item">
         <button className="button-link" onClick={logoutUser}>Logout</button>

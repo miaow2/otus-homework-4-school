@@ -10,8 +10,26 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
-  GET_ERRORS
+  GET_ERRORS,
+  CHANGE_TOKEN_SUCCESS
 } from './types';
+
+export const getConfig = (getState) => {
+
+  const token = getState().auth.token;
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  };
+
+  return config;
+}
 
 export const loadUser = () => (dispatch, getState) => {
 
@@ -124,4 +142,29 @@ export const logoutUser = () => (dispatch) => {
   dispatch({
     type: LOGOUT_SUCCESS
   });
+};
+
+export const changeToken = () => (dispatch, getState) => {
+
+  axios
+    .post('/api/auth/change-token', {}, getConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({
+        changeTokenSuccess: "Token changed successfully"
+      }));
+      dispatch({
+        type: CHANGE_TOKEN_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status
+      };
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors
+      });
+    });
 };

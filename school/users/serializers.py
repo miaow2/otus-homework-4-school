@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from django.conf import settings
 
 from .models import User
 
@@ -38,7 +37,6 @@ class LoginSerializer(serializers.Serializer):
 
     def validate(self, data):
         user = authenticate(username=data["username"], password=data["password"])
-        print(settings.AUTHENTICATION_BACKENDS)
         if user and user.is_active:
           return user
         raise serializers.ValidationError("Incorrect Credentials")
