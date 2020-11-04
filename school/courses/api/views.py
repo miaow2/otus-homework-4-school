@@ -8,6 +8,7 @@ from .serializers import CourseSerializer, LessonSerializer
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+    filterset_class = filters.CourseFilterSet
 
 
 class LessonViewSet(ModelViewSet):

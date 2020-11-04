@@ -7,7 +7,7 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  CHANGE_TOKEN_SUCCESS
+  CHANGE_TOKEN_SUCCESS,
 } from '../actions/types';
 
 const initialState = {

@@ -13,23 +13,7 @@ import {
   GET_ERRORS,
   CHANGE_TOKEN_SUCCESS
 } from './types';
-
-export const getConfig = (getState) => {
-
-  const token = getState().auth.token;
-
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  };
-
-  return config;
-}
+import { getConfig } from './utils';
 
 export const loadUser = () => (dispatch, getState) => {
 
@@ -37,20 +21,8 @@ export const loadUser = () => (dispatch, getState) => {
     type: USER_LOADING
   });
 
-  const token = getState().auth.token;
-
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  };
-
   axios
-    .get('/api/auth/user', config)
+    .get('/api/auth/user', getConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,
