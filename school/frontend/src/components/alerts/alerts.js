@@ -12,7 +12,7 @@ const Alerts = ({ alert, errors, messages }) => {
       alert.error(errors.msg.non_field_errors.join())
     };
     if (errors.msg.detail) {
-      alert.error(errors.msg.detail.join())
+      alert.error(errors.msg.detail)
     };
   }, [errors]);
 
@@ -31,6 +31,9 @@ const Alerts = ({ alert, errors, messages }) => {
     };
     if (messages.leaveCourse) {
       alert.success(messages.leaveCourse)
+    };
+    if (messages.enrollCourse) {
+      alert.success(messages.enrollCourse)
     };
   }, [messages]);
 

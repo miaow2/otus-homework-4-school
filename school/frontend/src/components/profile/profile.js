@@ -8,9 +8,9 @@ const Profile = ({ auth, courses, changeToken, getCourses, flushCourses, leaveCo
 
   useEffect(() => {
     getCourses();
-    return () => {
-      flushCourses()
-    }
+    // return () => {
+    //   flushCourses()
+    // }
   }, [])
 
   const coursesList = (
@@ -29,7 +29,7 @@ const Profile = ({ auth, courses, changeToken, getCourses, flushCourses, leaveCo
             <td>{item.description}</td>
             <td>
               <button className="btn btn-danger btn-sm"
-                onClick={() => leaveCourse(item.id, auth.user.id)}>Leave</button>
+                onClick={() => leaveCourse(item.id)}>Leave</button>
             </td>
           </tr>
         ))}

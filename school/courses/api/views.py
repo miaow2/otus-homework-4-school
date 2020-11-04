@@ -30,3 +30,16 @@ class LeaveCourseAPI(generics.GenericAPIView):
         course.participants.remove(user)
 
         return Response({"status": "ok"}, status=200)
+
+
+class EnrollCourseAPI(generics.GenericAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+
+    def post(self, request, *args, **kwargs):
+        user = self.request.user
+        course = Course.objects.get(id=request.data["course_id"])
+        course.participants.add(user)
+
+        return Response({"status": "ok"}, status=200)

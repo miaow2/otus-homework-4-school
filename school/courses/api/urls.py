@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework import routers
 
-from .views import CourseViewSet, LeaveCourseAPI, LessonViewSet
+from .views import CourseViewSet, EnrollCourseAPI, LeaveCourseAPI, LessonViewSet
 
 
 class CoursesRootView(routers.APIRootView):
@@ -17,5 +17,6 @@ router.register("lessons", LessonViewSet)
 app_name = "courses-api"
 custom_urls = [
     path("courses/leave", LeaveCourseAPI.as_view()),
+    path("courses/enroll", EnrollCourseAPI.as_view()),
 ]
 urlpatterns = router.urls + custom_urls
