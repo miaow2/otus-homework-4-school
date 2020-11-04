@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import Spinner from '../spinner';
 import { changeToken } from '../../actions/auth';
-import { getCourses, leaveCourse } from '../../actions/courses';
+import { getCourses, flushCourses, leaveCourse } from '../../actions/courses';
 
-const Profile = ({ auth, courses, changeToken, getCourses, leaveCourse }) => {
+const Profile = ({ auth, courses, changeToken, getCourses, flushCourses, leaveCourse }) => {
 
   useEffect(() => {
     getCourses();
+    return () => {
+      flushCourses()
+    }
   }, [])
 
   const coursesList = (
@@ -35,9 +37,6 @@ const Profile = ({ auth, courses, changeToken, getCourses, leaveCourse }) => {
     </table>
   );
 
-  const spinner = !courses.isLoaded ? <Spinner /> : null;
-  const content = courses.isLoaded ? <CourseListView list={courses.courses} /> : null;
-
   return (
     <>
       <div className="row mt-4">
@@ -59,43 +58,11 @@ const Profile = ({ auth, courses, changeToken, getCourses, leaveCourse }) => {
         </div>
       </div>
       <div className="row mt-4">
-        <h3>Courses</h3>
+        <h3>Your Courses</h3>
         {coursesList}
-        {/* {courses.isLoaded ? coursesList : <Spinner />} */}
-        {/* {spinner} */}
-        {/* {content} */}
       </div>
     </>
   )
-};
-
-const CourseListView = ({ courses }) => {
-
-  console.log(courses)
-
-  return (
-    <table className="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {courses.map((item) => (
-          <tr key={item.id}>
-            <td>{item.name}</td>
-            <td>{item.description}</td>
-            <td>
-              <button className="btn btn-danger btn-sm"
-                onClick={() => leaveCourse(item.id, auth.user.id)}>Leave</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
 };
 
 const mapStateToProps = (state) => ({
@@ -103,4 +70,4 @@ const mapStateToProps = (state) => ({
   courses: state.courses
 });
 
-export default connect(mapStateToProps, { changeToken, getCourses, leaveCourse })(Profile);
+export default connect(mapStateToProps, { changeToken, getCourses, flushCourses, leaveCourse })(Profile);

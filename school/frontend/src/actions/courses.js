@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { GET_COURSES, GET_ERRORS, LEAVE_COURSE } from './types';
+import { createMessage } from './messages';
+import { GET_COURSES, GET_ERRORS, FLUSH_COURSES, LEAVE_COURSE } from './types';
 import { getConfig } from './utils';
 
 export const getCourses = () => (dispatch, getState) => {
@@ -8,8 +9,10 @@ export const getCourses = () => (dispatch, getState) => {
   const id = getState().auth.user.id;
 
   axios
-    .get(`/api/school/courses/?participants_id=${id}`, getConfig(getState))
+    .get(`/api/courses/?participants_id=${id}`, getConfig(getState))
     .then((res) => {
+      console.log(res.data)
+      console.log(res.url)
       dispatch({
         type: GET_COURSES,
         payload: res.data.results,
@@ -27,37 +30,25 @@ export const getCourses = () => (dispatch, getState) => {
     });
 };
 
-export const leaveCourse = (courseId, userId) => (dispatch, getState) => {
+export const leaveCourse = (courseId) => (dispatch, getState) => {
 
-  const coursesList = getState().courses.courses
+  const data = {
+    course_id: courseId
+  };
 
   axios
-    .get(`/api/school/courses/${courseId}`, getConfig(getState))
+    .post("/api/courses/leave", data, getConfig(getState))
     .then((res) => {
-      const participants = res.data.participants;
-      const newParticipants = participants.filter((item) => item.id !== userId);
-      const data = {
-        participants: newParticipants
-      }
-      axios.patch(`/api/school/courses/${courseId}/`, data, getConfig(getState))
-        .then((res) => {
-          dispatch({
-            type: LEAVE_COURSE,
-            payload: coursesList.filter((item) => item.id !== courseId)
-          })
-        })
-        .catch((err) => {
-          const errors = {
-            msg: err.response.data,
-            status: err.response.status
-          };
-          dispatch({
-            type: GET_ERRORS,
-            payload: errors
-          });
-        });
+      dispatch(createMessage({
+        leaveCourse: "Leave from course"
+      }));
+      dispatch({
+        type: LEAVE_COURSE,
+        payload: courseId
+      })
     })
     .catch((err) => {
+      console.log(err)
       const errors = {
         msg: err.response.data,
         status: err.response.status
@@ -67,4 +58,11 @@ export const leaveCourse = (courseId, userId) => (dispatch, getState) => {
         payload: errors
       });
     });
+};
+
+export const flushCourses = () => (dispatch) => {
+
+  dispatch({
+    type: FLUSH_COURSES
+  })
 };

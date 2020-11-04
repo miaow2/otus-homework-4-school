@@ -9,16 +9,17 @@ from .schema import schema
 
 
 urlpatterns = [
-    path('', include('frontend.urls')),
-    path('', include('users.urls')),
-    path('api/contacts/', contacts_view),
-    path('api/school/', include('courses.api.urls')),
-    path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema), name='graphql'),
-    path('admin/', admin.site.urls),
+    path("", include("frontend.urls")),
+    path("", include("users.urls")),
+    path("api/", include("courses.api.urls")),
+    path("api/contacts/", contacts_view),
+    path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema), name="graphql"),
+    path("admin/", admin.site.urls),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns = [
-        path('__debug__/', include(debug_toolbar.urls)),
+        path("__debug__/", include(debug_toolbar.urls)),
     ] + urlpatterns

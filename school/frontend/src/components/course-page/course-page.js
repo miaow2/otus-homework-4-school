@@ -8,17 +8,17 @@ const CoursePage = ({ courseId }) => {
 
   useEffect(() => {
     axios
-    .get(`/api/school/courses/${courseId}`)
-    .then((res) => {
-      setCourse(res.data);
-      setLoaded(true);
-    })
-    .catch((err) => console.log(err));
+      .get(`/api/courses/${courseId}`)
+      .then((res) => {
+        setCourse(res.data);
+        setLoaded(true);
+      })
+      .catch((err) => console.log(err));
   }, [])
 
   return (
     <>
-      <h1>{ course.name }</h1>
+      <h1>{course.name}</h1>
       <div className="row mt-4">
         <div className="col-md-6">
           <div className="card mb-4">
@@ -29,7 +29,7 @@ const CoursePage = ({ courseId }) => {
               <tbody>
                 <tr>
                   <td>Description</td>
-                  <td>{ course.description }</td>
+                  <td>{course.description}</td>
                 </tr>
               </tbody>
             </table>

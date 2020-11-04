@@ -29,6 +29,9 @@ const Alerts = ({ alert, errors, messages }) => {
     if (messages.changeTokenSuccess) {
       alert.success(messages.changeTokenSuccess)
     };
+    if (messages.leaveCourse) {
+      alert.success(messages.leaveCourse)
+    };
   }, [messages]);
 
   return <Fragment />;

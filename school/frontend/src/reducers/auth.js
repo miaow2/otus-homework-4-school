@@ -52,7 +52,11 @@ const auth = (state = initialState, action) => {
         token: null,
         user: null,
         isAuthenticated: false,
-        isLoading: false
+        isLoading: false,
+        courses: {
+          courses: {},
+          isLoaded: false
+        }
       }
     default:
       return state

@@ -11,7 +11,7 @@ const CoursesList = () => {
 
   useEffect(() => {
     axios
-      .get('/api/school/courses')
+      .get('/api/courses')
       .then((res) => {
         setCourses(res.data.results);
         setLoaded(true)

@@ -1,8 +1,7 @@
-import { GET_COURSES, LEAVE_COURSE } from '../actions/types';
+import { GET_COURSES, FLUSH_COURSES, LEAVE_COURSE } from '../actions/types';
 
 const initialState = {
-  courses: [],
-  isLoaded: false
+  courses: []
 };
 
 export const courses = (state = initialState, action) => {
@@ -10,13 +9,17 @@ export const courses = (state = initialState, action) => {
     case GET_COURSES:
       return {
         ...state,
-        courses: action.payload,
-        isLoaded: true
+        courses: action.payload
       };
     case LEAVE_COURSE:
       return {
         ...state,
-        courses: action.payload
+        courses: state.courses.filter((course) => course.id !== action.payload)
+      }
+    case FLUSH_COURSES:
+      return {
+        ...state,
+        courses: []
       }
     default:
       return state;
